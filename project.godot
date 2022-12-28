@@ -50,6 +50,10 @@ flashlight_toggle={
  ]
 }
 
+[mono]
+
+project/assembly_name="Ghostly_Garden"
+
 [physics]
 
 common/enable_pause_aware_picking=true

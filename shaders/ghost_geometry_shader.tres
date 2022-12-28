@@ -1,0 +1,39 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// Shader type
+shader_type spatial;
+// Deformation Scale
+uniform float height_scale = 0.5;
+// Add noise texutre
+uniform sampler2D noise;
+// Ghost transparancy
+uniform float alpha : hint_range(0, 1) = 1.0;
+// Emission of light color
+uniform vec4 color : hint_color = vec4(0.0, 1.0, 0.0, 1.0);
+
+float fresnel(float amount, vec3 normal, vec3 view)
+{
+	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
+}
+
+// Vertex adjustments + animation
+void vertex() {
+	// Adjusts the ghost form
+	VERTEX.y += cos(VERTEX.x + 3.0) * sin(VERTEX.z * 3.0);
+	vec2 tex_position = VERTEX.xy / 2.0 + 0.5 + 0.3 * TIME;
+	// Applies noise texture
+	float height = texture(noise, tex_position).x;
+	VERTEX = VERTEX * (8.0 + height * height_scale);
+	// For the animation
+	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(
+		CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]
+	);
+}
+
+// Emits the color or else is invisble
+void fragment() {
+	float basic_fresnel = fresnel(3.0, NORMAL, VIEW);
+	EMISSION = color.xyz * basic_fresnel * 2.0;
+	ALPHA = basic_fresnel * alpha;
+}"
