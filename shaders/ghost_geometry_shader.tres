@@ -20,8 +20,8 @@ float fresnel(float amount, vec3 normal, vec3 view)
 // Vertex adjustments + animation
 void vertex() {
 	// Adjusts the ghost form
-	VERTEX.y += cos(VERTEX.x + 3.0) * sin(VERTEX.z * 3.0);
-	vec2 tex_position = VERTEX.xy / 2.0 + 0.5 + 0.3 * TIME;
+	VERTEX.y += cos(VERTEX.x + 3.0) * sin(VERTEX.z * 1.5);
+	vec2 tex_position = VERTEX.xy / 6.0 + 1.5 + 0.3 * TIME;
 	// Applies noise texture
 	float height = texture(noise, tex_position).x;
 	VERTEX = VERTEX * (8.0 + height * height_scale);
@@ -33,7 +33,7 @@ void vertex() {
 
 // Emits the color or else is invisble
 void fragment() {
-	float basic_fresnel = fresnel(3.0, NORMAL, VIEW);
-	EMISSION = color.xyz * basic_fresnel * 2.0;
+	float basic_fresnel = fresnel(2.0, NORMAL, VIEW);
+	EMISSION = color.xyz * basic_fresnel * 1.0;
 	ALPHA = basic_fresnel * alpha;
 }"
