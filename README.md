@@ -6,6 +6,13 @@ Tiago Rebelo nº 111896
 Nuno Neto nº 114957
 Pedro Costa nº 111708
 
+
+## Synopsis:
+You are trapped inside a garden at night. You must find the 3 pieces in order to escape with the teleporter, before getting caught by the ghostly forms of your ancestors.
+
+## Gameplay loop:
+You have a health bar that quickly goes down when a ghost is near you. You must quickly find where the ghost is and point a flashlight in order to save yourself. You win the game if you find all the 3 pieces of the teleporter without dying.
+
 ## Start the game
 
 Open Project in Godot and Press `Play`
