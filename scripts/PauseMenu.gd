@@ -27,6 +27,10 @@ func set_is_paused(value):
 func _on_Continue_pressed():
 	self.is_paused = false
 	
+func _on_Restart_pressed():
+	self.is_paused = false
+	get_tree().reload_current_scene()
+	
 func _on_MainMenu_pressed():
 	self.is_paused = false
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
@@ -34,3 +38,5 @@ func _on_MainMenu_pressed():
 func _on_ExitGame_pressed():
 	self.is_paused = false
 	get_tree().quit()
+
+
