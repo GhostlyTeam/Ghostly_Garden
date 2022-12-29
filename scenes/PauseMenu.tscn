@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.243137, 0, 0.415686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 215.0
+margin_top = 125.0
+margin_right = -211.0
+margin_bottom = -86.0
+theme = ExtResource( 1 )
+custom_constants/separation = 20
+
+[node name="title" type="Label" parent="VBoxContainer"]
+pause_mode = 1
+margin_right = 598.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 350, 0 )
+text = "Pause Menu"
+align = 1
+uppercase = true
+
+[node name="Line" type="Panel" parent="VBoxContainer"]
+margin_top = 91.0
+margin_right = 598.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 598, 5 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+margin_top = 116.0
+margin_right = 598.0
+margin_bottom = 166.0
+text = "Continue"
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+margin_top = 186.0
+margin_right = 598.0
+margin_bottom = 236.0
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+margin_top = 256.0
+margin_right = 598.0
+margin_bottom = 306.0
+text = "Main Menu"
+
+[node name="ExitGame" type="Button" parent="VBoxContainer"]
+margin_top = 326.0
+margin_right = 598.0
+margin_bottom = 376.0
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitGame" to="." method="_on_ExitGame_pressed"]
