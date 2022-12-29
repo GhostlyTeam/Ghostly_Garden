@@ -59,14 +59,14 @@ func process_input(delta):
 	# ----------------------------------
 
 	# ----------------------------------
-	# Capturing/Freeing the cursor
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+#	# Capturing/Freeing the cursor
+#	if Input.is_action_just_pressed("ui_cancel"):
+#		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+#			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#		else:
+#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# ----------------------------------
-	
+
 	# Flashlight
 	if Input.is_action_just_pressed("flashlight_toggle"):
 		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible
