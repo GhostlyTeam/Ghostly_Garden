@@ -1,6 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shaders/ghost_geometry_shader.tres" type="Shader" id=1]
+[ext_resource path="res://scripts/Ghost.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=6]
+radius = 10.6199
+height = 8.33703
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -18,9 +23,15 @@ shader_param/alpha = 1.0
 shader_param/color = Color( 1, 0, 0, 1 )
 shader_param/noise = SubResource( 5 )
 
-[node name="Ghost_Enemy" type="Spatial"]
+[node name="Ghost_Enemy" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 17.437, 0 )
+shape = SubResource( 6 )
 
 [node name="Ghost_Mesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.4371, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 

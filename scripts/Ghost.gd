@@ -1,22 +1,34 @@
-extends Spatial
+extends KinematicBody
 
-# Declare member variables here.
-var position
+onready var nav = $"../NavMeshInst" as Navigation
+onready var player = $"../Player" as KinematicBody
 
 
-# Called when the node enters the scene tree for the first time.
+var path = []
+var current_node = 0
+var speed = 2
+
+
 func _ready():
-	randomize()
-	var x_range = Vector2(100, 400)
-	var y_range = Vector2(100, 400)
-
-	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0] 
-	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
-	var random_pos = Vector2(random_x, random_y)
-
-	position=random_pos
+	# Generate path to the player
+	#update_path(player.global_transform.origin)
+	pass
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(delta):
+	update_path(player.global_transform.origin)
+	if current_node < path.size():
+		var direction: Vector3 = path[current_node] - global_transform.origin
+		if direction.length() < 1:
+			current_node += 1
+		else:
+			move_and_slide(direction.normalized() * speed)
+
+func update_path(target_position):
+	path = nav.map_get_path(global_transform.origin, target_position)
+	
+
+	
+	
+	
