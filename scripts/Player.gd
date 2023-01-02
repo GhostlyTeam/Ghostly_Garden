@@ -8,8 +8,10 @@ const ACCEL = 4.5
 var health = 100
 var flashlight = 100
 
-export (float) var REFRESH_TIME = 2.0 # 2 second refersh
+export (float) var REFRESH_TIME = 2.0 # 2 second 
+export (float) var DEATH_TIME = 3.0 # 5 second 
 const MAX_FLASHLIGHT = 100
+const MAX_HEALTH = 100
 
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
@@ -51,12 +53,35 @@ func _ready():
 	$Rotation_Helper/Flashlight.light_energy = 5
 
 func _process(delta):
-	if isPlayerReceivingInput and flashlight < 100:
-		var perc = delta / REFRESH_TIME
-		flashlight += (perc * MAX_FLASHLIGHT)
-		if flashlight > 100:
-			flashlight = MAX_FLASHLIGHT
-		gui.set_flashlight(flashlight)
+	if isPlayerReceivingInput:
+
+		if flashlight < 100:
+			var perc = delta / REFRESH_TIME
+			flashlight += (perc * MAX_FLASHLIGHT)
+			if flashlight > 100:
+				flashlight = MAX_FLASHLIGHT
+			gui.set_flashlight(flashlight)
+
+		var areas = $Rotation_Helper/DeadCollision.get_overlapping_areas()
+		var isGhostDetected = false
+		var perc_death = delta / DEATH_TIME
+		for area in areas:
+			if area.is_in_group("ghost"):
+				isGhostDetected = true
+				health -= (perc_death * MAX_HEALTH)
+				if health <= 0:
+					health = 0
+					gui.set_health(health)
+					isPlayerReceivingInput = false
+					gui.visible = false
+					gamemodeElemsAnim.play("Died")
+				
+		if not isGhostDetected and health < 100:
+			health += (perc_death * MAX_HEALTH)
+			if health > 100:
+				health = 100
+
+		gui.set_health(health)
 
 
 func _physics_process(delta):
@@ -156,3 +181,11 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
+
+
+func _on_DeadCollision_area_entered(area:Area):
+	pass # Replace with function body.
+
+
+func _on_DeadCollision_area_exited(area:Area):
+	pass # Replace with function body.
