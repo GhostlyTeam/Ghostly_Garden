@@ -20,6 +20,7 @@ func _ready():
 
 func kill():
 	$AnimationPlayer.play("Death")
+	$Area/CollisionShape.disabled = true
 	var err = get_tree().create_timer(2).connect("timeout", self, "respawn")
 	if err:
 		print(err)

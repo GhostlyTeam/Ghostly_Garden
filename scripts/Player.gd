@@ -27,6 +27,7 @@ var MOUSE_SENSITIVITY = 0.05
 
 var gui
 var gamemodeElemsAnim
+var gamemodeElemsDamageAnim
 
 # Items
 var isGoldBarCollected = false
@@ -36,6 +37,9 @@ var isPearlCollected = false
 # Input ready
 var isPlayerReceivingInput = true
 
+# Ghosts
+var ghost_count = 0
+
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
@@ -44,6 +48,7 @@ func _ready():
 	
 	gui = get_node("../GUI")
 	gamemodeElemsAnim = get_node("../GameModeElems/AnimationPlayer")
+	gamemodeElemsDamageAnim = get_node("../GameModeElems/DamageAnimation")
 	
 	gui.toggle_gold_bar(false)
 	gui.toggle_ruby(false)
@@ -184,8 +189,17 @@ func _input(event):
 
 
 func _on_DeadCollision_area_entered(area:Area):
-	pass # Replace with function body.
+	if area.is_in_group("ghost"):
+		ghost_count += 1
+		if ghost_count == 1:
+			gamemodeElemsDamageAnim.stop()
+			gamemodeElemsDamageAnim.play("DamageStart")
+
 
 
 func _on_DeadCollision_area_exited(area:Area):
-	pass # Replace with function body.
+	if area.is_in_group("ghost"):
+		ghost_count -= 1
+		if ghost_count == 0:
+			gamemodeElemsDamageAnim.play("DamageStart",-1, -1.0, false)
+

@@ -4109,3 +4109,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.239, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="Rotation_Helper/DeadCollision"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.37722, 0 )
 shape = SubResource( 26 )
+
+[connection signal="area_entered" from="Rotation_Helper/DeadCollision" to="." method="_on_DeadCollision_area_entered"]
+[connection signal="area_exited" from="Rotation_Helper/DeadCollision" to="." method="_on_DeadCollision_area_exited"]
