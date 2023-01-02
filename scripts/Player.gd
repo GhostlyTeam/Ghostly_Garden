@@ -6,6 +6,10 @@ const JUMP_SPEED = 50
 const ACCEL = 4.5
 
 var health = 100
+var flashlight = 100
+
+export (float) var REFRESH_TIME = 2.0 # 2 second refersh
+const MAX_FLASHLIGHT = 100
 
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
@@ -34,6 +38,15 @@ func _ready():
 	gui.toggle_pearl(false)
 	gui.set_health(100)
 	gui.set_flashlight(100)
+
+func _process(delta):
+	if flashlight < 100:
+		var perc = delta / REFRESH_TIME
+		flashlight += (perc * MAX_FLASHLIGHT)
+		if flashlight > 100:
+			flashlight = MAX_FLASHLIGHT
+		gui.set_flashlight(flashlight)
+
 
 func _physics_process(delta):
 	process_input(delta)
@@ -66,30 +79,16 @@ func process_input(delta):
 	# Basis vectors are already normalized.
 	dir += -cam_xform.basis.z * input_movement_vector.y
 	dir += cam_xform.basis.x * input_movement_vector.x
-	# ----------------------------------
 
-	# ----------------------------------
 	# Jumping
 	if is_on_floor():
 		if Input.is_action_just_pressed("movement_jump"):
 			vel.y = JUMP_SPEED
-	# ----------------------------------
-
-	# ----------------------------------
-#	# Capturing/Freeing the cursor
-#	if Input.is_action_just_pressed("ui_cancel"):
-#		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-#			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-#		else:
-#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	# ----------------------------------
 
 	if Input.is_action_just_pressed("flashlight_click"):
-		gui.set_flashlight(0)
-
-	# Flashlight
-	if Input.is_action_just_pressed("flashlight_toggle"):
-		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible
+		if flashlight >= 100:
+			flashlight = 0
+			gui.set_flashlight(0)
 
 func process_movement(delta):
 	dir.y = 0
