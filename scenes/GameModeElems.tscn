@@ -1,0 +1,219 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/GameModeControl.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Died"
+length = 10.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DiedBox/Died:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 5, 8, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinBox/Win:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DiedBox/Died:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Win"
+length = 10.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinBox/Win:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 5, 8, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "DamageStart"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.196078 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "DamageStop"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0.196078 ), Color( 1, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ) ]
+}
+
+[node name="GameModeElems" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="DamageBackground" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="DiedBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -299.0
+margin_right = 299.0
+theme = ExtResource( 1 )
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Died" type="Label" parent="DiedBox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 264.0
+margin_right = 598.0
+margin_bottom = 335.0
+rect_min_size = Vector2( 350, 0 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "you died"
+align = 1
+uppercase = true
+
+[node name="WinBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -175.0
+margin_right = 175.0
+theme = ExtResource( 1 )
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Win" type="Label" parent="WinBox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 264.0
+margin_right = 350.0
+margin_bottom = 335.0
+rect_min_size = Vector2( 350, 0 )
+custom_colors/font_color = Color( 0.101961, 1, 0, 1 )
+text = "You Win!!!"
+align = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Died = SubResource( 3 )
+anims/RESET = SubResource( 1 )
+anims/Win = SubResource( 2 )
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/DamageStart = SubResource( 4 )
+anims/DamageStop = SubResource( 6 )
+anims/RESET = SubResource( 5 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
