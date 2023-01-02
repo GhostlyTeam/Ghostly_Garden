@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/ruby-small-grayscale.png" type="Texture" id=5]
 [ext_resource path="res://assets/gold-bar-small-grayscale.png" type="Texture" id=6]
 [ext_resource path="res://assets/pearl-small-grayscale.png" type="Texture" id=7]
-[ext_resource path="res://scenes/GUI.gd" type="Script" id=8]
+[ext_resource path="res://scripts/GUI.gd" type="Script" id=8]
 
 [node name="Control" type="MarginContainer"]
 anchor_top = 1.0

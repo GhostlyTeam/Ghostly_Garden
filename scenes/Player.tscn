@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 
@@ -3850,6 +3850,9 @@ tracks/0/keys = {
 "values": [ 16.0 ]
 }
 
+[sub_resource type="ConvexPolygonShape" id=24]
+points = PoolVector3Array( 0, 0, 0, 10, 10, 30, 10, -10, 30, -10, 10, 30, -10, -10, 30 )
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
@@ -3865,7 +3868,7 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.239, 0 )
 
 [node name="Model" type="Spatial" parent="Rotation_Helper"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.405, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00693607, -12.405, 0.00106049 )
 
 [node name="Armature" type="Spatial" parent="Rotation_Helper/Model"]
 
@@ -4080,3 +4083,9 @@ spot_angle = 50.59
 [node name="FlashlightPlayer" type="AnimationPlayer" parent="Rotation_Helper/Flashlight"]
 anims/Flashlight = SubResource( 22 )
 anims/RESET = SubResource( 23 )
+
+[node name="Area" type="Area" parent="Rotation_Helper"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.307539, -0.0646362 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Rotation_Helper/Area"]
+shape = SubResource( 24 )

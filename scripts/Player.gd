@@ -91,6 +91,11 @@ func process_input(delta):
 			flashlight = 0
 			gui.set_flashlight(0)
 			$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
+			var areas = $Rotation_Helper/Area.get_overlapping_areas()
+			for body in areas:
+				print(body)
+				if body.is_in_group("ghost"):
+					body.kill()
 
 func process_movement(delta):
 	dir.y = 0

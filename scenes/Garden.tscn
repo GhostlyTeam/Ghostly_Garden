@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/Garden.glb" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Ghost.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/Ghost.gd" type="Script" id=4]
 [ext_resource path="res://world/Garden.gd" type="Script" id=5]
 [ext_resource path="res://scenes/PauseCanvas.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=7]
@@ -23,4 +22,3 @@ transform = Transform( -0.983474, 0, 0.181051, 0, 1, 0, -0.181051, 0, -0.983474,
 
 [node name="Ghost_Enemy" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7511, 15.4881, 12.9863 )
-script = ExtResource( 4 )
