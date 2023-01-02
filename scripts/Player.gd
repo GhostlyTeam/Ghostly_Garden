@@ -1,21 +1,22 @@
 extends KinematicBody
 
+# Player Constants
 const GRAVITY = -100
-var vel = Vector3()
-const MAX_SPEED = 20
 const JUMP_SPEED = 50
 const ACCEL = 4.5
 
 var health = 100
 
-var dir = Vector3()
-
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
 
-var camera
-var rotation_helper
 
+# Player Variables
+var vel = Vector3()
+var dir = Vector3()
+var camera
+var player_speed = 20
+var rotation_helper
 var MOUSE_SENSITIVITY = 0.05
 
 var gui
@@ -55,6 +56,10 @@ func process_input(delta):
 		input_movement_vector.x -= 1
 	if Input.is_action_pressed("movement_right"):
 		input_movement_vector.x += 1
+	if Input.is_action_just_pressed("movement_run"):
+		player_speed += 15
+	if Input.is_action_just_released("movement_run"):
+		player_speed -= 15
 
 	input_movement_vector = input_movement_vector.normalized()
 
@@ -96,7 +101,7 @@ func process_movement(delta):
 	hvel.y = 0
 
 	var target = dir
-	target *= MAX_SPEED
+	target *= player_speed
 
 	var accel
 	if dir.dot(hvel) > 0:
