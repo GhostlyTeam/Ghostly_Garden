@@ -6,6 +6,8 @@ const MAX_SPEED = 20
 const JUMP_SPEED = 50
 const ACCEL = 4.5
 
+var health = 100
+
 var dir = Vector3()
 
 const DEACCEL= 16
@@ -16,11 +18,21 @@ var rotation_helper
 
 var MOUSE_SENSITIVITY = 0.05
 
+var gui
+
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	gui = get_node("../GUI")
+	
+	gui.toggle_gold_bar(false)
+	gui.toggle_ruby(false)
+	gui.toggle_pearl(false)
+	gui.set_health(100)
+	gui.set_flashlight(100)
 
 func _physics_process(delta):
 	process_input(delta)
@@ -66,6 +78,9 @@ func process_input(delta):
 #		else:
 #			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# ----------------------------------
+
+	if Input.is_action_just_pressed("flashlight_click"):
+		gui.set_flashlight(0)
 
 	# Flashlight
 	if Input.is_action_just_pressed("flashlight_toggle"):
