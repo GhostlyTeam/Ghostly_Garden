@@ -24,11 +24,15 @@ var rotation_helper
 var MOUSE_SENSITIVITY = 0.05
 
 var gui
+var gamemodeElemsAnim
 
 # Items
 var isGoldBarCollected = false
 var isRubyCollected = false
 var isPearlCollected = false
+
+# Input ready
+var isPlayerReceivingInput = true
 
 func _ready():
 	camera = $Rotation_Helper/Camera
@@ -37,6 +41,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	gui = get_node("../GUI")
+	gamemodeElemsAnim = get_node("../GameModeElems/AnimationPlayer")
 	
 	gui.toggle_gold_bar(false)
 	gui.toggle_ruby(false)
@@ -46,7 +51,7 @@ func _ready():
 	$Rotation_Helper/Flashlight.light_energy = 5
 
 func _process(delta):
-	if flashlight < 100:
+	if isPlayerReceivingInput and flashlight < 100:
 		var perc = delta / REFRESH_TIME
 		flashlight += (perc * MAX_FLASHLIGHT)
 		if flashlight > 100:
@@ -55,8 +60,9 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	process_input(delta)
-	process_movement(delta)
+	if isPlayerReceivingInput:
+		process_input(delta)
+		process_movement(delta)
 
 func process_input(delta):
 
@@ -114,6 +120,10 @@ func process_input(delta):
 				elif area.get_collectible_type() == "Pearl":
 					gui.toggle_pearl(true)
 					isPearlCollected = true
+		if isGoldBarCollected and isRubyCollected and isPearlCollected:
+			isPlayerReceivingInput = false
+			gui.visible = false
+			gamemodeElemsAnim.play("Win")
 
 func process_movement(delta):
 	dir.y = 0
@@ -139,7 +149,8 @@ func process_movement(delta):
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
 
 func _input(event):
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	
+	if isPlayerReceivingInput and event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 		var camera_rot = rotation_helper.rotation_degrees

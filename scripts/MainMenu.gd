@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_Start_pressed() -> void:
 	get_tree().change_scene("res://scenes/Garden.tscn")
