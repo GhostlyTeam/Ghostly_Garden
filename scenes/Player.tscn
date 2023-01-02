@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 
@@ -3819,6 +3819,37 @@ tracks/34/imported = true
 tracks/34/enabled = true
 tracks/34/keys = PoolRealArray( 0, 1, 1.01328e-06, -7.3202e-07, -4.39584e-07, 0.279726, 0.0140126, -0.0783186, 0.956778, 1, 1, 1, 0.0666667, 1, 2.38419e-07, -7.00355e-07, -7.45058e-09, 0.268242, 0.00808504, -0.0800044, 0.95999, 1, 1, 1, 0.133333, 1, -2.38419e-07, -9.18284e-07, -8.9407e-08, 0.236928, -0.00795409, -0.0844881, 0.967814, 1, 1, 1, 0.266667, 1, -1.78814e-07, -6.78003e-07, -1.3411e-07, 0.125284, -0.0637347, -0.0991885, 0.985091, 1, 1, 1, 0.333333, 1, -1.01328e-06, -9.18284e-07, -1.11759e-07, 0.0657928, -0.0925845, -0.106222, 0.987834, 1, 1, 1, 0.4, 1, 6.85453e-07, -8.71718e-07, 2.30968e-07, 0.0223062, -0.113243, -0.110969, 0.987099, 1, 1, 1, 0.466667, 1, -1.78814e-07, -1.06357e-06, 3.35276e-07, -0.000939186, -0.124052, -0.113293, 0.985786, 1, 1, 1, 0.533333, 1, -2.08616e-07, -8.64267e-07, -8.9407e-08, -0.00302535, -0.125353, -0.112772, 0.985678, 1, 1, 1, 0.6, 1, -2.38419e-07, -8.28877e-07, -2.75671e-07, 0.00647114, -0.124201, -0.108103, 0.98633, 1, 1, 1, 0.666667, 1, -5.96046e-08, -8.23289e-07, -4.61936e-07, 0.0241089, -0.12224, -0.0995919, 0.987197, 1, 1, 1, 0.866667, 1, 1.78814e-07, -8.69855e-07, 5.96046e-08, 0.094239, -0.114407, -0.0657173, 0.986768, 1, 1, 1, 0.933333, 1, 2.08616e-07, -1.02073e-06, 1.56462e-07, 0.107596, -0.112858, -0.0592147, 0.985992, 1, 1, 1, 1, 1, 1.78814e-07, -8.34465e-07, -7.45058e-08, 0.112565, -0.112277, -0.0567911, 0.985646, 1, 1, 1 )
 
+[sub_resource type="Animation" id=22]
+resource_name = "Flashlight"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 16.0, 5.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 16.0 ]
+}
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
@@ -4041,7 +4072,11 @@ far = 180.0
 [node name="Flashlight" type="SpotLight" parent="Rotation_Helper"]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.307539, -0.0646362 )
 light_color = Color( 1, 0.915375, 0.769531, 1 )
-light_energy = 0.8
+light_energy = 16.0
 spot_range = 30.0
 spot_attenuation = 2.0
-spot_angle = 50.0
+spot_angle = 50.59
+
+[node name="FlashlightPlayer" type="AnimationPlayer" parent="Rotation_Helper/Flashlight"]
+anims/Flashlight = SubResource( 22 )
+anims/RESET = SubResource( 23 )

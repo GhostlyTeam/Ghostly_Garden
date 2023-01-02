@@ -38,6 +38,7 @@ func _ready():
 	gui.toggle_pearl(false)
 	gui.set_health(100)
 	gui.set_flashlight(100)
+	$Rotation_Helper/Flashlight.light_energy = 5
 
 func _process(delta):
 	if flashlight < 100:
@@ -89,6 +90,7 @@ func process_input(delta):
 		if flashlight >= 100:
 			flashlight = 0
 			gui.set_flashlight(0)
+			$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
 
 func process_movement(delta):
 	dir.y = 0
