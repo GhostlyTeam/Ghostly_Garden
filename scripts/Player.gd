@@ -25,6 +25,11 @@ var MOUSE_SENSITIVITY = 0.05
 
 var gui
 
+# Items
+var isGoldBarCollected = false
+var isRubyCollected = false
+var isPearlCollected = false
+
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
@@ -91,11 +96,24 @@ func process_input(delta):
 			flashlight = 0
 			gui.set_flashlight(0)
 			$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
-			var areas = $Rotation_Helper/Area.get_overlapping_areas()
+			var areas = $Rotation_Helper/FlashlightCollision.get_overlapping_areas()
 			for body in areas:
-				print(body)
 				if body.is_in_group("ghost"):
 					body.kill()
+	
+	if Input.is_action_just_pressed("interaction"):
+		var areas = $Rotation_Helper/InteractionCollision.get_overlapping_areas()
+		for area in areas:	
+			if area.get_class() == "CollectibleItem":
+				if area.get_collectible_type() == "GoldBar":
+					gui.toggle_gold_bar(true)
+					isGoldBarCollected = true
+				elif area.get_collectible_type() == "Ruby":
+					gui.toggle_ruby(true)
+					isRubyCollected = true
+				elif area.get_collectible_type() == "Pearl":
+					gui.toggle_pearl(true)
+					isPearlCollected = true
 
 func process_movement(delta):
 	dir.y = 0
@@ -124,7 +142,6 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot

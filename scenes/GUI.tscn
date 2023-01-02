@@ -63,7 +63,6 @@ margin_bottom = 100.0
 texture = ExtResource( 5 )
 
 [node name="Pearl" type="TextureRect" parent="HUD/Items"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
 margin_left = 207.0
 margin_right = 307.0
 margin_bottom = 100.0

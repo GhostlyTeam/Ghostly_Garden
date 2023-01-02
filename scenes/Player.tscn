@@ -3851,7 +3851,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="ConvexPolygonShape" id=24]
-points = PoolVector3Array( 0, 0, 0, 10, 10, 30, 10, -10, 30, -10, 10, 30, -10, -10, 30 )
+points = PoolVector3Array( 0, 0, 0, 5, 5, 10, 5, -5, 10, -5, 5, 10, -5, -5, 10 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -4084,8 +4084,14 @@ spot_angle = 50.59
 anims/Flashlight = SubResource( 22 )
 anims/RESET = SubResource( 23 )
 
-[node name="Area" type="Area" parent="Rotation_Helper"]
+[node name="FlashlightCollision" type="Area" parent="Rotation_Helper"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.307539, -0.0646362 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Rotation_Helper/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Rotation_Helper/FlashlightCollision"]
+shape = SubResource( 24 )
+
+[node name="InteractionCollision" type="Area" parent="Rotation_Helper"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.307539, -0.0646362 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Rotation_Helper/InteractionCollision"]
 shape = SubResource( 24 )

@@ -25,19 +25,25 @@ func set_flashlight(flashlight_value):
 	
 func toggle_gold_bar(value):
 	if value == true:
+		$HUD/Items/GoldBar.modulate = Color("#ffffffff")
 		$HUD/Items/GoldBar.texture = gold_bar
 	else:
+		$HUD/Items/GoldBar.modulate = Color("#64ffffff")
 		$HUD/Items/GoldBar.texture = gold_bar_grayscale
 	
 func toggle_ruby(value):
 	if value == true:
+		$HUD/Items/Ruby.modulate = Color("#ffffffff")
 		$HUD/Items/Ruby.texture = ruby
 	else:
+		$HUD/Items/Ruby.modulate = Color("#64ffffff")
 		$HUD/Items/Ruby.texture = ruby_grayscale
 		
 func toggle_pearl(value):
 	if value == true:
+		$HUD/Items/Pearl.modulate = Color("#ffffffff")
 		$HUD/Items/Pearl.texture = pearl
 	else:
+		$HUD/Items/Pearl.modulate = Color("#64ffffff")
 		$HUD/Items/Pearl.texture = pearl_grayscale
 
