@@ -61,19 +61,19 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [x] Basic GamePlay Loop
 - [x] Ghost Shader - Vertex Shader
 - [x] Ghost Shader - Fragment Shader
-- [] World Assets (outsourced)
+- [ ] World Assets (outsourced)
 - [x] Different textures and materials
 - [x] Camera Movement with Rotation
-- [] Camera Shaking (near Ghost)
-- [] Lightning Object - Goraud
-- [] Lightning Object - Phong
-- [] Lightning Object - Blin
+- [ ] Camera Shaking (near Ghost)
+- [ ] Lightning Object - Goraud
+- [ ] Lightning Object - Phong
+- [ ] Lightning Object - Blin
 - [x] Lightning Object - Flat
-- [] Bump-maps with movement (lake)
+- [ ] Bump-maps with movement (lake)
 - [x] Shadows in assets
-- [] Piece Material - Very specular (Gold)
-- [] Piece Material - Transparent and emissive (Ruby)
-- [] Piece Material - Opaque object (Diffuse)
+- [ ] Piece Material - Very specular (Gold)
+- [ ] Piece Material - Transparent and emissive (Ruby)
+- [ ] Piece Material - Opaque object (Diffuse)
 - [x] Translation, Rotation and Scale in Ghosts
-- [] BONUS: Pixelized Filter
-- [] BONUS: Game Sounds
+- [ ] BONUS: Pixelized Filter
+- [ ] BONUS: Game Sounds
