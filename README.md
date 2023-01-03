@@ -56,3 +56,24 @@ To export the world in Blender:
 To add collisions to blender simply add the suffix `-col` to the selected meshes in blender. Godot automatically adds an appropriate collision shape to the mesh: https://docs.godotengine.org/en/latest/tutorials/assets_pipeline/importing_scenes.html#create-collisions-col-convcol-colonly-convcolonly
 
 To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blend/rename.html#batch-rename
+
+## Checklist - Visual Computing Components
+- [x] Basic GamePlay Loop
+- [x] Ghost Shader - Vertex Shader
+- [x] Ghost Shader - Fragment Shader
+- [] World Assets (outsourced)
+- [x] Different textures and materials
+- [x] Camera Movement with Rotation
+- [] Camera Shaking (near Ghost)
+- [] Lightning Object - Goraud
+- [] Lightning Object - Phong
+- [] Lightning Object - Blin
+- [x] Lightning Object - Flat
+- [] Bump-maps with movement (lake)
+- [x] Shadows in assets
+- [] Piece Material - Very specular (Gold)
+- [] Piece Material - Transparent and emissive (Ruby)
+- [] Piece Material - Opaque object (Diffuse)
+- [x] Translation, Rotation and Scale in Ghosts
+- [] BONUS: Pixelized Filter
+- [] BONUS: Game Sounds
