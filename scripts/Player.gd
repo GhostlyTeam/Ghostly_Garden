@@ -1,20 +1,25 @@
 extends KinematicBody
 
+export (float) var REFRESH_TIME = 2.0 # 2 second 
+export (float) var DEATH_TIME = 3.0 # 5 second 
+
 # Player Constants
 const GRAVITY = -100
 const JUMP_SPEED = 50
 const ACCEL = 4.5
+const MAX_FLASHLIGHT = 100
+const MAX_HEALTH = 100
+const DEACCEL= 16
+const MAX_SLOPE_ANGLE = 40
+const SHAKE_CAMERA_STRENGTH: float = 60.0
 
 var health = 100
 var flashlight = 100
 
-export (float) var REFRESH_TIME = 2.0 # 2 second 
-export (float) var DEATH_TIME = 3.0 # 5 second 
-const MAX_FLASHLIGHT = 100
-const MAX_HEALTH = 100
+# Camera Shake
+var camera_shake_intensity = 0.0
+var camera_shake_duration = 0.0
 
-const DEACCEL= 16
-const MAX_SLOPE_ANGLE = 40
 
 
 # Player Variables
@@ -73,6 +78,7 @@ func _process(delta):
 		for area in areas:
 			if area.is_in_group("ghost"):
 				isGhostDetected = true
+				$Rotation_Helper/DeadCollision/CamShake.shake_cam() # Camera Shakes
 				health -= (perc_death * MAX_HEALTH)
 				if health <= 0:
 					health = 0
@@ -94,7 +100,8 @@ func _physics_process(delta):
 		process_input(delta)
 		process_movement(delta)
 
-func process_input(delta):
+# warning-ignore:return_value_discarded
+func process_input(_delta):
 
 	# ----------------------------------
 	# Walking
@@ -202,4 +209,5 @@ func _on_DeadCollision_area_exited(area:Area):
 		ghost_count -= 1
 		if ghost_count == 0:
 			gamemodeElemsDamageAnim.play("DamageStart",-1, -1.0, false)
+
 

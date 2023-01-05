@@ -25,7 +25,7 @@ transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.983474, 0, 0.181051, 0, 1, 0, -0.181051, 0, -0.983474, 66.9415, 0.472111, 108.453 )
+transform = Transform( -0.688432, 0, 0.126736, 0, 0.7, 0, -0.126736, 0, -0.688432, 66.9415, 0.472111, 108.453 )
 
 [node name="Ghost_Enemy" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7511, 15.4881, 12.9863 )
