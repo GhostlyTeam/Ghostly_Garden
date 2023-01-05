@@ -69,7 +69,7 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [ ] World Assets (outsourced)
 - [x] Different textures and materials
 - [x] Camera Movement with Rotation
-- [ ] Camera Shaking (near Ghost)
+- [x] Camera Shaking (near Ghost)
 - [ ] Lightning Object - Goraud
 - [ ] Lightning Object - Phong
 - [ ] Lightning Object - Blin
@@ -81,4 +81,4 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [ ] Piece Material - Opaque object (Diffuse)
 - [x] Translation, Rotation and Scale in Ghosts
 - [ ] BONUS: Pixelized Filter
-- [ ] BONUS: Game Sounds
+- [x] BONUS: Game Sounds
