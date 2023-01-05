@@ -61,6 +61,7 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 
 ## Checklist - Visual Computing Components
 - [x] Basic GamePlay Loop
+- [x] Spooky Feeling
 - [x] Ghost Shader - Vertex Shader
 - [x] Ghost Shader - Fragment Shader
 - [ ] World Assets (outsourced)
@@ -71,7 +72,7 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [ ] Lightning Object - Phong
 - [ ] Lightning Object - Blin
 - [x] Lightning Object - Flat
-- [ ] Bump-maps with movement (lake)
+- [x] Normal-maps with movement (lake)
 - [x] Shadows in assets
 - [ ] Piece Material - Very specular (Gold)
 - [ ] Piece Material - Transparent and emissive (Ruby)
