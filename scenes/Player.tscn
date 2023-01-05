@@ -4077,7 +4077,7 @@ anims/Rifle_unequip = SubResource( 21 )
 transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, -0.307539, -0.0646362 )
 current = true
 fov = 90.0
-far = 180.0
+far = 500.0
 
 [node name="Flashlight" type="SpotLight" parent="Rotation_Helper"]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.307539, -0.0646362 )
