@@ -363,3 +363,4 @@ omni_range = 11.7207
 
 [node name="backgroundSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
+volume_db = 10.0

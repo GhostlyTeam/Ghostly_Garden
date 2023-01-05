@@ -83,6 +83,7 @@ func _process(delta):
 				gui.set_health(health)
 				isPlayerReceivingInput = false
 				gui.visible = false
+				$gameOverSound.play()
 				gamemodeElemsAnim.play("Died")
 			gui.set_health(health)
 
@@ -164,6 +165,7 @@ func process_input(_delta):
 		if isGoldBarCollected and isRubyCollected and isPearlCollected:
 			isPlayerReceivingInput = false
 			gui.visible = false
+			$victorySound.play()
 			gamemodeElemsAnim.play("Win")
 
 	if Input.is_action_just_pressed("flashlight_toggle"):

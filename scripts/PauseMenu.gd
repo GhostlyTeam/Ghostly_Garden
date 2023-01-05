@@ -7,6 +7,7 @@ func _ready():
 	#Game is not paused by default
 	set_is_paused(false)
 	
+	
 #Handless "Pause" input to pause the game
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
