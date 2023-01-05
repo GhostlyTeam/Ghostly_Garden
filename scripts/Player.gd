@@ -20,8 +20,6 @@ var flashlight = 100
 var camera_shake_intensity = 0.0
 var camera_shake_duration = 0.0
 
-
-
 # Player Variables
 var vel = Vector3()
 var dir = Vector3()
@@ -135,15 +133,16 @@ func process_input(_delta):
 			vel.y = JUMP_SPEED
 
 	if Input.is_action_just_pressed("flashlight_click"):
-		$flashAttack.play()
-		if flashlight >= 100:
-			flashlight = 0
-			gui.set_flashlight(0)
-			$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
-			var areas = $Rotation_Helper/FlashlightCollision.get_overlapping_areas()
-			for body in areas:
-				if body.is_in_group("ghost"):
-					body.kill()
+		if $Rotation_Helper/Flashlight.visible:
+			if flashlight >= 100:
+				$flashAttack.play()
+				flashlight = 0
+				gui.set_flashlight(0)
+				$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
+				var areas = $Rotation_Helper/FlashlightCollision.get_overlapping_areas()
+				for body in areas:
+					if body.is_in_group("ghost"):
+						body.kill()
 	
 	if Input.is_action_just_pressed("interaction"):
 		var areas = $Rotation_Helper/InteractionCollision.get_overlapping_areas()
@@ -211,7 +210,6 @@ func _on_DeadCollision_area_entered(area:Area):
 		if ghost_count == 1:
 			gamemodeElemsDamageAnim.stop()
 			gamemodeElemsDamageAnim.play("DamageStart")
-
 
 
 func _on_DeadCollision_area_exited(area:Area):
