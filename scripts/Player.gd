@@ -67,26 +67,24 @@ func _process(delta):
 				flashlight = MAX_FLASHLIGHT
 			gui.set_flashlight(flashlight)
 
-		var areas = $Rotation_Helper/DeadCollision.get_overlapping_areas()
-		var isGhostDetected = false
-		var perc_death = delta / DEATH_TIME
-		for area in areas:
-			if area.is_in_group("ghost"):
-				isGhostDetected = true
-				health -= (perc_death * MAX_HEALTH)
-				if health <= 0:
-					health = 0
-					gui.set_health(health)
-					isPlayerReceivingInput = false
-					gui.visible = false
-					gamemodeElemsAnim.play("Died")
-				
-		if not isGhostDetected and health < 100:
+	
+		if ghost_count > 0:
+			var perc_death = delta / DEATH_TIME
+			health -= (perc_death * MAX_HEALTH)
+			if health <= 0:
+				health = 0
+				gui.set_health(health)
+				isPlayerReceivingInput = false
+				gui.visible = false
+				gamemodeElemsAnim.play("Died")
+			gui.set_health(health)
+
+		elif ghost_count < 1 and health < 100:
+			var perc_death = delta / DEATH_TIME
 			health += (perc_death * MAX_HEALTH)
 			if health > 100:
 				health = 100
-
-		gui.set_health(health)
+			gui.set_health(health)
 
 
 func _physics_process(delta):
