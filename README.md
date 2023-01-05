@@ -31,6 +31,8 @@ Open Project in Godot and Press `Play`
 
 `Esc` - Pause Menu
 
+`F` - Toggle Flashlight
+
 ## Synopsis
 You are trapped inside a garden at night. You must find the 3 pieces in order to escape with the teleporter, before getting caught by the ghostly forms of your ancestors.
 
