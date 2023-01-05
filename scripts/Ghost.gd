@@ -1,22 +1,26 @@
 extends Spatial
 class_name Ghost
 
-# Declare member variables here.
-var position
+export var movement_speed : float = 10.0
 
+onready var nav_agent : NavigationAgent = $NavigationAgent
+onready var player : KinematicBody = get_node("../Player")
 
-# Called when the node enters the scene tree for the first time.
+var movement_delta : float
+
 func _ready():
-	pass
-	# randomize()
-	# var x_range = Vector2(100, 400)
-	# var y_range = Vector2(100, 400)
+	nav_agent.set_target_location(player.global_translation)
 
-	# var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0] 
-	# var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
-	# var random_pos = Vector2(random_x, random_y)
+func _physics_process(delta):
 
-	# position=random_pos
+	nav_agent.set_target_location(player.global_translation)
+	movement_delta = movement_speed * delta
+	var next_path_position : Vector3 = nav_agent.get_next_location()
+	var current_agent_position : Vector3 = global_transform.origin
+	var new_velocity : Vector3 = (next_path_position - current_agent_position).normalized() * movement_delta
+	#nav_agent.set_velocity(new_velocity)
+	global_transform.origin = global_transform.origin.move_toward(global_transform.origin + new_velocity, movement_delta)
+
 
 func kill():
 	$AnimationPlayer.play("Death")
@@ -25,7 +29,7 @@ func kill():
 	if err:
 		print(err)
 
-
 func respawn():
 	queue_free()
 	pass
+
