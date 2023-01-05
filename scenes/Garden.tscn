@@ -1,15 +1,17 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://world/Garden.glb" type="PackedScene" id=1]
+[ext_resource path="res://world/garden.glb" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Ghost.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/CollectibleItem.tscn" type="PackedScene" id=4]
-[ext_resource path="res://world/Garden.gd" type="Script" id=5]
+[ext_resource path="res://assets/Gold.glb" type="PackedScene" id=5]
 [ext_resource path="res://scenes/PauseCanvas.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Crosshair.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/GameModeElems.tscn" type="PackedScene" id=9]
 [ext_resource path="res://meshes/water.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/Pearl.glb" type="PackedScene" id=11]
+[ext_resource path="res://assets/Ruby.glb" type="PackedScene" id=12]
 
 [sub_resource type="ProceduralSky" id=4]
 sky_top_color = Color( 0, 0.0705882, 0.113725, 1 )
@@ -80,27 +82,32 @@ environment = SubResource( 3 )
 
 [node name="PauseGUI" parent="." instance=ExtResource( 6 )]
 
-[node name="Garden" parent="." instance=ExtResource( 1 )]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
-script = ExtResource( 5 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.688432, 0, 0.126736, 0, 0.7, 0, -0.126736, 0, -0.688432, 66.9415, 0.472111, 108.453 )
+transform = Transform( -0.699586, 0, -0.0240758, 0, 0.7, 0, 0.0240758, 0, -0.699586, -39.5134, 7.96277, 79.9479 )
 
 [node name="Ghost_Enemy" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7511, 15.4881, 12.9863 )
 
 [node name="GoldBar" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5867, 1.02283, 57.0437 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -157.657, 8.08375, -35.5437 )
 item_type = "GoldBar"
 
+[node name="Gold" parent="GoldBar" instance=ExtResource( 5 )]
+transform = Transform( 7, 0, 0, 0, 7, -1.19209e-07, 0, 1.19209e-07, 7, -1.22458, -0.0573077, -0.265221 )
+
 [node name="Ruby" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6114, 1.02283, 57.0327 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 162.237, 6.85049, -66.8101 )
 item_type = "Ruby"
 
+[node name="Ruby" parent="Ruby" instance=ExtResource( 12 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+
 [node name="Pearl" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9926, 1.02283, 57.0327 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101.423, 9.63781, 62.4073 )
 item_type = "Pearl"
+
+[node name="Pearl" parent="Pearl" instance=ExtResource( 11 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="Water" parent="." instance=ExtResource( 10 )]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, -15.0442, -1, 8 )
@@ -109,3 +116,244 @@ transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, -15.0442, -1, 8 )
 autoplay = "move_water"
 anims/RESET = SubResource( 1 )
 anims/move_water = SubResource( 2 )
+
+[node name="garden" parent="." instance=ExtResource( 1 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 101.608, 31.1218, 62.6096 )
+light_color = Color( 0.976471, 0.835294, 0.611765, 1 )
+light_energy = 3.202
+shadow_enabled = true
+spot_range = 49.4092
+spot_angle = 37.6703
+
+[node name="OmniLight_red" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 167.007, 4.49237, -72.8114 )
+light_color = Color( 1, 0.447059, 0.509804, 1 )
+light_energy = 14.532
+light_specular = 0.0
+shadow_enabled = true
+omni_range = 28.3463
+
+[node name="OmniLight_red2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 149.039, 4.49237, -71.8541 )
+light_color = Color( 1, 0.447059, 0.509804, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 28.3463
+
+[node name="OmniLight_red3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 166.533, 4.49237, -46.9047 )
+light_color = Color( 1, 0.447059, 0.509804, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 28.3463
+
+[node name="OmniLight_Oil1" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 81.4031, 0.937414, 18.6869 )
+light_color = Color( 0.905882, 0.905882, 0.776471, 1 )
+light_energy = 8.514
+light_specular = 0.0
+
+[node name="OmniLight_Oil0" type="OmniLight" parent="."]
+transform = Transform( 0.962852, -0.270029, 1.18034e-08, 0, -4.37114e-08, -1, 0.270029, 0.962852, -4.20876e-08, 101.39, 33.8046, 64.0879 )
+light_color = Color( 0.976471, 0.835294, 0.611765, 1 )
+light_energy = 5.302
+light_specular = 0.0
+omni_range = 5.22324
+
+[node name="OmniLight_Oil2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 58.8265, 0.93741, -57.5604 )
+light_color = Color( 0.905882, 0.905882, 0.776471, 1 )
+light_energy = 8.514
+light_specular = 0.0
+
+[node name="OmniLight_Oil3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 94.0503, 0.93741, -51.8652 )
+light_color = Color( 0.905882, 0.905882, 0.776471, 1 )
+light_energy = 8.514
+light_specular = 0.0
+
+[node name="OmniLight_Oil4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 21.2934, 0.937407, -7.02051 )
+light_color = Color( 0.905882, 0.905882, 0.776471, 1 )
+light_energy = 8.514
+light_specular = 0.0
+
+[node name="Post_Spotlight_Insi1" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -57.1837, 11.1021, -48.9666 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 1.557
+light_specular = 7.0
+spot_range = 20.0112
+spot_angle = 44.3807
+
+[node name="Post_OmniLight1" type="OmniLight" parent="Post_Spotlight_Insi1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.191921, -0.243168, -3.0358 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 0.303
+light_indirect_energy = 0.0
+light_specular = 0.0
+omni_range = 10.6847
+
+[node name="Post_Spotlight_Insi2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -98.2445, 11.1021, 45.2995 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 1.557
+light_specular = 7.0
+spot_range = 20.0112
+spot_angle = 44.9517
+
+[node name="Post_OmniLight2" type="OmniLight" parent="Post_Spotlight_Insi2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.63164, -0.383301, -3.0358 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 0.303
+light_specular = 0.0
+omni_range = 10.6847
+
+[node name="Post_Spotlight_Insi3" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -122.846, 11.1021, 1.19442 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 1.557
+light_specular = 7.0
+spot_range = 17.1149
+spot_angle = 49.4432
+
+[node name="Post_OmniLight3" type="OmniLight" parent="Post_Spotlight_Insi3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.01162, 0.475857, -3.0358 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 0.303
+light_specular = 0.0
+omni_range = 10.6847
+
+[node name="Post_Spotlight_Gold1" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -150.966, 11.1021, -41.5829 )
+light_color = Color( 0.976471, 0.815686, 0.509804, 1 )
+light_energy = 1.557
+light_specular = 7.0
+spot_range = 28.7488
+spot_angle = 66.0938
+
+[node name="Post_OmniLight1" type="OmniLight" parent="Post_Spotlight_Gold1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0767975, 0.200798, -0.441948 )
+light_color = Color( 0.976471, 0.815686, 0.509804, 1 )
+light_energy = 0.303
+light_specular = 0.0
+shadow_bias = 10.0
+omni_range = 6.0918
+
+[node name="Post_Spotlight_Gold2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -163.88, 11.1021, -27.6765 )
+light_color = Color( 0.976471, 0.815686, 0.509804, 1 )
+light_energy = 1.557
+light_specular = 7.0
+spot_range = 28.7488
+spot_angle = 66.0938
+
+[node name="Post_OmniLight2" type="OmniLight" parent="Post_Spotlight_Gold2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.276703, -0.147694, -0.441948 )
+light_color = Color( 0.976471, 0.815686, 0.509804, 1 )
+light_energy = 0.303
+light_specular = 0.0
+shadow_bias = 10.0
+omni_range = 6.0918
+
+[node name="Post_Spotlight_Gold3" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -160.628, 13.9264, -37.3353 )
+light_color = Color( 0.976471, 0.815686, 0.509804, 1 )
+light_energy = 16.0
+light_specular = 0.0
+spot_range = 28.7488
+spot_angle = 30.3877
+
+[node name="Post_Spotlight_Out1" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 37.1378, 10.6648, 2.69497 )
+light_color = Color( 0.611765, 0.976471, 0.933333, 1 )
+light_energy = 1.557
+light_specular = 0.0
+spot_range = 20.0112
+spot_angle = 64.6875
+
+[node name="Post_OmniLight" type="OmniLight" parent="Post_Spotlight_Out1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.276703, -0.147694, -0.457415 )
+light_color = Color( 0.45098, 0.67451, 0.992157, 1 )
+light_energy = 5.0
+light_specular = 30.0
+
+[node name="Post_Spotlight_Gate1" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -52.149, 10.6648, 72.6123 )
+light_color = Color( 0.345098, 0.619608, 0.713726, 1 )
+light_energy = 1.557
+light_specular = 0.0
+spot_range = 20.0112
+spot_angle = 64.6875
+
+[node name="Post_OmniLight" type="OmniLight" parent="Post_Spotlight_Gate1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.276703, -0.147694, -0.457415 )
+light_color = Color( 0.345098, 0.619608, 0.713726, 1 )
+light_energy = 2.0
+light_specular = 30.0
+
+[node name="Post_Spotlight_Gate2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -27.9154, 10.6648, 72.6123 )
+light_color = Color( 0.345098, 0.619608, 0.713726, 1 )
+light_energy = 1.557
+light_specular = 0.0
+spot_range = 20.0112
+spot_angle = 64.6875
+
+[node name="Post_OmniLight" type="OmniLight" parent="Post_Spotlight_Gate2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.276703, -0.147694, -0.457415 )
+light_color = Color( 0.345098, 0.619608, 0.713726, 1 )
+light_energy = 2.0
+light_specular = 30.0
+
+[node name="OmniLight_Wall1" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -64.0137, 11.0817, 41.7741 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -85.9124, 11.0817, 54.9705 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -86.3326, 11.0817, -7.15709 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -75.8577, 11.0817, -40.3516 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall5" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -165.636, 11.0817, 9.25288 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall6" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -158.475, 11.0817, 54.6299 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207
+
+[node name="OmniLight_Wall7" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -148.489, 11.0817, 36.2716 )
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 11.7207

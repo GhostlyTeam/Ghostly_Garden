@@ -149,12 +149,15 @@ func process_input(_delta):
 				if area.get_collectible_type() == "GoldBar":
 					gui.toggle_gold_bar(true)
 					isGoldBarCollected = true
+					area.visible = false
 				elif area.get_collectible_type() == "Ruby":
 					gui.toggle_ruby(true)
 					isRubyCollected = true
+					area.visible = false
 				elif area.get_collectible_type() == "Pearl":
 					gui.toggle_pearl(true)
 					isPearlCollected = true
+					area.visible = false
 		if isGoldBarCollected and isRubyCollected and isPearlCollected:
 			isPlayerReceivingInput = false
 			gui.visible = false
