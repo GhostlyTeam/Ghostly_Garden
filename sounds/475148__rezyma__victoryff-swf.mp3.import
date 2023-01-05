@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/475148__rezyma__victoryff-swf.mp3-7531a339a8849009d6ea310c2bfdfd98.mp3str"
+
+[deps]
+
+source_file="res://sounds/475148__rezyma__victoryff-swf.mp3"
+dest_files=[ "res://.import/475148__rezyma__victoryff-swf.mp3-7531a339a8849009d6ea310c2bfdfd98.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
