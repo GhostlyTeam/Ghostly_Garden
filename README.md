@@ -66,19 +66,19 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [x] Spooky Feeling
 - [x] Ghost Shader - Vertex Shader
 - [x] Ghost Shader - Fragment Shader
-- [ ] World Assets (outsourced)
+- [x] World Assets (outsourced)
 - [x] Different textures and materials
 - [x] Camera Movement with Rotation
 - [x] Camera Shaking (near Ghost)
 - [ ] Lightning Object - Goraud
-- [ ] Lightning Object - Phong
-- [ ] Lightning Object - Blin
+- [x] Lightning Object - Phong
+- [x] Lightning Object - Blin
 - [x] Lightning Object - Flat
 - [x] Normal-maps with movement (lake)
 - [x] Shadows in assets
-- [ ] Piece Material - Very specular (Gold)
-- [ ] Piece Material - Transparent and emissive (Ruby)
-- [ ] Piece Material - Opaque object (Diffuse)
+- [x] Piece Material - Very specular (Gold)
+- [x] Piece Material - Transparent and emissive (Ruby)
+- [x] Piece Material - Opaque object (Diffuse)
 - [x] Translation, Rotation and Scale in Ghosts
 - [ ] BONUS: Pixelized Filter
 - [x] BONUS: Game Sounds
