@@ -20,8 +20,6 @@ var flashlight = 100
 var camera_shake_intensity = 0.0
 var camera_shake_duration = 0.0
 
-
-
 # Player Variables
 var vel = Vector3()
 var dir = Vector3()
@@ -72,8 +70,9 @@ func _process(delta):
 				flashlight = MAX_FLASHLIGHT
 			gui.set_flashlight(flashlight)
 
-	
 		if ghost_count > 0:
+			if $ghostSound.playing == false:
+				$ghostSound.play()
 			var perc_death = delta / DEATH_TIME
 			health -= (perc_death * MAX_HEALTH)
 			$Rotation_Helper/DeadCollision/CamShake.shake_cam() # Camera Shakes
@@ -82,6 +81,7 @@ func _process(delta):
 				gui.set_health(health)
 				isPlayerReceivingInput = false
 				gui.visible = false
+				$gameOverSound.play()
 				gamemodeElemsAnim.play("Died")
 			gui.set_health(health)
 
@@ -133,19 +133,22 @@ func process_input(_delta):
 			vel.y = JUMP_SPEED
 
 	if Input.is_action_just_pressed("flashlight_click"):
-		if flashlight >= 100:
-			flashlight = 0
-			gui.set_flashlight(0)
-			$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
-			var areas = $Rotation_Helper/FlashlightCollision.get_overlapping_areas()
-			for body in areas:
-				if body.is_in_group("ghost"):
-					body.kill()
+		if $Rotation_Helper/Flashlight.visible:
+			if flashlight >= 100:
+				$flashAttack.play()
+				flashlight = 0
+				gui.set_flashlight(0)
+				$Rotation_Helper/Flashlight/FlashlightPlayer.play("Flashlight")
+				var areas = $Rotation_Helper/FlashlightCollision.get_overlapping_areas()
+				for body in areas:
+					if body.is_in_group("ghost"):
+						body.kill()
 	
 	if Input.is_action_just_pressed("interaction"):
 		var areas = $Rotation_Helper/InteractionCollision.get_overlapping_areas()
 		for area in areas:	
 			if area.get_class() == "CollectibleItem":
+				$pickIpSound.play()
 				if area.get_collectible_type() == "GoldBar":
 					gui.toggle_gold_bar(true)
 					isGoldBarCollected = true
@@ -161,11 +164,16 @@ func process_input(_delta):
 		if isGoldBarCollected and isRubyCollected and isPearlCollected:
 			isPlayerReceivingInput = false
 			gui.visible = false
+			$victorySound.play()
 			gamemodeElemsAnim.play("Win")
 			
 	if Input.is_action_just_pressed("flashlight_toggle"):
 		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible	
 			
+
+	if Input.is_action_just_pressed("flashlight_toggle"):
+		$flashlightSound.play()
+		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible
 
 func process_movement(delta):
 	dir.y = 0
@@ -206,7 +214,6 @@ func _on_DeadCollision_area_entered(area:Area):
 		if ghost_count == 1:
 			gamemodeElemsDamageAnim.stop()
 			gamemodeElemsDamageAnim.play("DamageStart")
-
 
 
 func _on_DeadCollision_area_exited(area:Area):
