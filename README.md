@@ -79,6 +79,6 @@ To batch rename in blender: https://docs.blender.org/manual/en/latest/files/blen
 - [x] Piece Material - Very specular (Gold)
 - [x] Piece Material - Transparent and emissive (Ruby)
 - [x] Piece Material - Opaque object (Diffuse)
-- [x] Translation, Rotation and Scale in Ghosts
+- [x] Translation, Rotation and Scale in Items
 - [ ] BONUS: Pixelized Filter
 - [x] BONUS: Game Sounds
