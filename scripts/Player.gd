@@ -1,27 +1,33 @@
 extends KinematicBody
 
+export (float) var REFRESH_TIME = 2.0 # 2 second 
+export (float) var DEATH_TIME = 3.0 # 5 second 
+
 # Player Constants
 const GRAVITY = -100
 const JUMP_SPEED = 50
 const ACCEL = 4.5
+const MAX_FLASHLIGHT = 100
+const MAX_HEALTH = 100
+const DEACCEL= 16
+const MAX_SLOPE_ANGLE = 40
+const SHAKE_CAMERA_STRENGTH: float = 60.0
 
 var health = 100
 var flashlight = 100
 
-export (float) var REFRESH_TIME = 2.0 # 2 second 
-export (float) var DEATH_TIME = 3.0 # 5 second 
-const MAX_FLASHLIGHT = 100
-const MAX_HEALTH = 100
+# Camera Shake
+var camera_shake_intensity = 0.0
+var camera_shake_duration = 0.0
 
-const DEACCEL= 16
-const MAX_SLOPE_ANGLE = 40
 
 
 # Player Variables
 var vel = Vector3()
 var dir = Vector3()
 var camera
-var player_speed = 20
+var player_speed = 15
+var RUN_SPEED_INC = 10
 var rotation_helper
 var MOUSE_SENSITIVITY = 0.05
 
@@ -71,6 +77,7 @@ func _process(delta):
 		if ghost_count > 0:
 			var perc_death = delta / DEATH_TIME
 			health -= (perc_death * MAX_HEALTH)
+			$Rotation_Helper/DeadCollision/CamShake.shake_cam() # Camera Shakes
 			if health <= 0:
 				health = 0
 				gui.set_health(health)
@@ -92,7 +99,8 @@ func _physics_process(delta):
 		process_input(delta)
 		process_movement(delta)
 
-func process_input(delta):
+# warning-ignore:return_value_discarded
+func process_input(_delta):
 
 	# ----------------------------------
 	# Walking
@@ -110,9 +118,9 @@ func process_input(delta):
 	if Input.is_action_pressed("movement_right"):
 		input_movement_vector.x += 1
 	if Input.is_action_just_pressed("movement_run"):
-		player_speed += 15
+		player_speed += RUN_SPEED_INC
 	if Input.is_action_just_released("movement_run"):
-		player_speed -= 15
+		player_speed -= RUN_SPEED_INC
 
 	input_movement_vector = input_movement_vector.normalized()
 
@@ -142,16 +150,22 @@ func process_input(delta):
 				if area.get_collectible_type() == "GoldBar":
 					gui.toggle_gold_bar(true)
 					isGoldBarCollected = true
+					area.visible = false
 				elif area.get_collectible_type() == "Ruby":
 					gui.toggle_ruby(true)
 					isRubyCollected = true
+					area.visible = false
 				elif area.get_collectible_type() == "Pearl":
 					gui.toggle_pearl(true)
 					isPearlCollected = true
+					area.visible = false
 		if isGoldBarCollected and isRubyCollected and isPearlCollected:
 			isPlayerReceivingInput = false
 			gui.visible = false
 			gamemodeElemsAnim.play("Win")
+
+	if Input.is_action_just_pressed("flashlight_toggle"):
+		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible
 
 func process_movement(delta):
 	dir.y = 0
@@ -194,10 +208,8 @@ func _on_DeadCollision_area_entered(area:Area):
 			gamemodeElemsDamageAnim.play("DamageStart")
 
 
-
 func _on_DeadCollision_area_exited(area:Area):
 	if area.is_in_group("ghost"):
 		ghost_count -= 1
 		if ghost_count == 0:
 			gamemodeElemsDamageAnim.play("DamageStart",-1, -1.0, false)
-
