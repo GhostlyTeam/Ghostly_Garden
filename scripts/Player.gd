@@ -166,10 +166,6 @@ func process_input(_delta):
 			gui.visible = false
 			$victorySound.play()
 			gamemodeElemsAnim.play("Win")
-			
-	if Input.is_action_just_pressed("flashlight_toggle"):
-		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible	
-			
 
 	if Input.is_action_just_pressed("flashlight_toggle"):
 		$flashlightSound.play()

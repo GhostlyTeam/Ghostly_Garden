@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/garden.glb-26ee6118d57249b4fb71a7b04603ccdd.scn"
+path="res://.import/Garden.glb-bd063e5369a536cafd78aa4b50f4fde5.scn"
 
 [deps]
 
-source_file="res://world/garden.glb"
-dest_files=[ "res://.import/garden.glb-26ee6118d57249b4fb71a7b04603ccdd.scn" ]
+source_file="res://world/Garden.glb"
+dest_files=[ "res://.import/Garden.glb-bd063e5369a536cafd78aa4b50f4fde5.scn" ]
 
 [params]
 
