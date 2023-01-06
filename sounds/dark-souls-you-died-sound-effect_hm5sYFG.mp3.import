@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dark-souls-you-died-sound-effect_hm5sYFG.mp3-eef5c90463341c5a43965e2aac0bae5a.mp3str"
+
+[deps]
+
+source_file="res://sounds/dark-souls-you-died-sound-effect_hm5sYFG.mp3"
+dest_files=[ "res://.import/dark-souls-you-died-sound-effect_hm5sYFG.mp3-eef5c90463341c5a43965e2aac0bae5a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

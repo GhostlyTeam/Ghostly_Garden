@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://world/garden.glb" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://scenes/Crosshair.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/GameModeElems.tscn" type="PackedScene" id=9]
 [ext_resource path="res://meshes/water.tscn" type="PackedScene" id=10]
+[ext_resource path="res://textures/controls_tips.jpg" type="Texture" id=11]
+[ext_resource path="res://textures/DIO.png" type="Texture" id=14]
+[ext_resource path="res://scripts/Garden.gd" type="Script" id=15]
+[ext_resource path="res://sounds/137070__klankbeeld__horror-ambience-15.wav" type="AudioStream" id=16]
 
 [sub_resource type="ProceduralSky" id=4]
 sky_top_color = Color( 0, 0.0705882, 0.113725, 1 )
@@ -64,43 +68,6 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -158.403, 8.06642, -35.0338 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 7, 7, 7 ) ]
-}
 
 [sub_resource type="Animation" id=8]
 resource_name = "Animation"
@@ -302,7 +269,18 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 5, 
 cell_height = 10.0
 agent_radius = 1.5
 
+[sub_resource type="PlaneMesh" id=14]
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_texture = ExtResource( 14 )
+
+[sub_resource type="PlaneMesh" id=16]
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_texture = ExtResource( 11 )
+
 [node name="Root" type="Spatial"]
+script = ExtResource( 15 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
@@ -337,7 +315,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8121, 12, -39.57 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8121, 12, 69.8671 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.699586, 0, -0.0240758, 0, 0.7, 0, 0.0240758, 0, -0.699586, -39.5134, 7.96277, 79.9479 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -39.5134, 7.96277, 79.9479 )
 
 [node name="GoldBar" parent="." instance=ExtResource( 4 )]
 transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, -158.403, 8.06642, -35.0338 )
@@ -366,6 +344,18 @@ autoplay = "Animation"
 anims/Animation = SubResource( 10 )
 anims/RESET = SubResource( 11 )
 
+[node name="PearlFinal" type="MeshInstance" parent="Pearl"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.156685, 0.363665, -0.24155 )
+skeleton = NodePath("../..")
+
+[node name="SpotLightPearl" type="SpotLight" parent="Pearl"]
+transform = Transform( -0.987209, -6.96905e-09, -0.159433, -0.159433, 4.31523e-08, 0.987209, 0, 1, -4.37114e-08, -0.721542, 0.397228, -0.311924 )
+light_color = Color( 0.772549, 0.631373, 0.968627, 1 )
+light_energy = 0.965
+shadow_enabled = true
+spot_range = 49.4092
+spot_angle = 37.6703
+
 [node name="Water" parent="." instance=ExtResource( 10 )]
 transform = Transform( 50, 0, 0, 0, 50, 0, 0, 0, 50, 50.2255, -0.79826, -29.7357 )
 
@@ -388,6 +378,14 @@ shadow_enabled = true
 spot_range = 49.4092
 spot_angle = 37.6703
 
+[node name="SpotLightD" type="SpotLight" parent="."]
+transform = Transform( -0.573076, 3.58216e-08, -0.819502, 0.819502, 2.50499e-08, -0.573076, 0, -1, -4.37114e-08, -196.349, 0.923851, 5.51368 )
+light_color = Color( 0.976471, 0.835294, 0.611765, 1 )
+light_energy = 3.202
+shadow_enabled = true
+spot_range = 47.661
+spot_angle = 57.0289
+
 [node name="OmniLight_red" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 167.007, 4.49237, -72.8114 )
 light_color = Color( 1, 0.447059, 0.509804, 1 )
@@ -398,17 +396,52 @@ omni_range = 28.3463
 
 [node name="OmniLight_red2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 149.039, 4.49237, -71.8541 )
-light_color = Color( 1, 0.447059, 0.509804, 1 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
 light_energy = 1.662
 light_specular = 0.0
 omni_range = 28.3463
 
 [node name="OmniLight_red3" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 166.533, 4.49237, -46.9047 )
-light_color = Color( 1, 0.447059, 0.509804, 1 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
 light_energy = 1.662
 light_specular = 0.0
 omni_range = 28.3463
+
+[node name="OmniLight_red4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 142.711, 4.49237, -21.3754 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 15.0053
+
+[node name="OmniLight_red5" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 130.366, 4.49237, -59.5146 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 17.1325
+
+[node name="OmniLight_red6" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.97722, 4.49237, -25.0053 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 21.1147
+
+[node name="OmniLight_red7" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -161.15, 6.44268, 70.8567 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 21.1147
+
+[node name="OmniLight_red8" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -104.629, 6.44268, -30.2982 )
+light_color = Color( 0.752941, 0.286275, 0.964706, 1 )
+light_energy = 1.662
+light_specular = 0.0
+omni_range = 13.0794
 
 [node name="OmniLight_Oil1" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 81.4031, 0.937414, 18.6869 )
@@ -569,6 +602,14 @@ light_color = Color( 0.345098, 0.619608, 0.713726, 1 )
 light_energy = 2.0
 light_specular = 30.0
 
+[node name="OmniLight_Wall8" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -38.9923, 7.4464, 88.3884 )
+visible = false
+light_color = Color( 1, 0.816333, 0.62, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 9.70998
+
 [node name="OmniLight_Wall1" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -64.0137, 11.0817, 41.7741 )
 light_color = Color( 1, 0.816333, 0.62, 1 )
@@ -617,3 +658,39 @@ light_color = Color( 1, 0.816333, 0.62, 1 )
 light_energy = 16.0
 light_specular = 0.0
 omni_range = 11.7207
+
+[node name="KONODIODA" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, -7.08921e-07, 3.09879e-14, -16.2182, 16.2182, -7.08921e-07, -7.08921e-07, -175.259, 16.4003, 5.40009 )
+mesh = SubResource( 14 )
+skeleton = NodePath("../Pearl1_Blinn")
+material/0 = SubResource( 15 )
+
+[node name="Controls" type="MeshInstance" parent="."]
+transform = Transform( -6.09003, 2.82618e-07, 2.66204e-07, -1.79156e-07, 0.113377, -6.05076, -7.77961e-07, -0.993552, -0.690467, -39.4817, 7.26574, 91.4511 )
+mesh = SubResource( 16 )
+skeleton = NodePath("../Pearl1_Blinn")
+material/0 = SubResource( 17 )
+
+[node name="Pearl1_Blinn" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.443, 9.81727, 62.6364 )
+
+[node name="Pearl1_Phong" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 104.187, 9.81727, 59.6283 )
+
+[node name="Pearl1_Phong2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 98.0513, 9.81727, 63.7023 )
+
+[node name="Pearl2_Toon" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100.682, 10.0139, 65.9523 )
+
+[node name="SpotLightPearl2" type="SpotLight" parent="Pearl2_Toon"]
+transform = Transform( -0.987209, -6.96905e-09, -0.159433, -0.159433, 4.31523e-08, 0.987209, 0, 1, -4.37114e-08, -0.691689, 0.0335636, -0.0703735 )
+light_color = Color( 0.894118, 0.968627, 0.631373, 1 )
+light_energy = 0.965
+shadow_enabled = true
+spot_range = 49.4092
+spot_angle = 37.6703
+
+[node name="backgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = 10.0
