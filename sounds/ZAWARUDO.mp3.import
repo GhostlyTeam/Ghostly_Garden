@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ZAWARUDO.mp3-4ab6dcbebfed16cd0aaeb7935a1b10c1.mp3str"
+
+[deps]
+
+source_file="res://sounds/ZAWARUDO.mp3"
+dest_files=[ "res://.import/ZAWARUDO.mp3-4ab6dcbebfed16cd0aaeb7935a1b10c1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

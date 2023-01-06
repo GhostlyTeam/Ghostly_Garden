@@ -16,7 +16,8 @@ func _ready():
 	pass
 
 func _process(delta):
-	if Input.is_action_just_pressed("interaction"):
+	if Input.is_action_just_pressed("ZAWARUDO"):
+		$stopMoving.play()
 		isMoving = not isMoving
 
 func _physics_process(delta):
