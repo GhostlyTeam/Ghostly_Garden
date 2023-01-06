@@ -21,7 +21,6 @@ onready var initial_rotation := camera_node.rotation_degrees as Vector3
 
 # Shaking
 func _process(delta):
-	print(camera_node)
 	time += delta
 	shake = max(shake - delta * shake_reduction_rate, 0.0)
 	

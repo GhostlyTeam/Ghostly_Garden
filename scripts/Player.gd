@@ -24,7 +24,8 @@ var camera_shake_duration = 0.0
 var vel = Vector3()
 var dir = Vector3()
 var camera
-var player_speed = 20
+var player_speed = 15
+var RUN_SPEED_INC = 10
 var rotation_helper
 var MOUSE_SENSITIVITY = 0.05
 
@@ -117,9 +118,9 @@ func process_input(_delta):
 	if Input.is_action_pressed("movement_right"):
 		input_movement_vector.x += 1
 	if Input.is_action_just_pressed("movement_run"):
-		player_speed += 15
+		player_speed += RUN_SPEED_INC
 	if Input.is_action_just_released("movement_run"):
-		player_speed -= 15
+		player_speed -= RUN_SPEED_INC
 
 	input_movement_vector = input_movement_vector.normalized()
 
@@ -217,5 +218,3 @@ func _on_DeadCollision_area_exited(area:Area):
 		ghost_count -= 1
 		if ghost_count == 0:
 			gamemodeElemsDamageAnim.play("DamageStart",-1, -1.0, false)
-
-

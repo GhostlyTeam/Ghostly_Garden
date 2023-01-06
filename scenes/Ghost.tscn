@@ -100,3 +100,5 @@ script = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 6 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="."]

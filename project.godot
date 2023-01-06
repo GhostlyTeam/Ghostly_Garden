@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "CollectibleItem",
 "language": "GDScript",
 "path": "res://scripts/CollectibleItem.gd"
-}, {
-"base": "Spatial",
-"class": "Ghost",
-"language": "GDScript",
-"path": "res://scripts/Ghost.gd"
 } ]
 _global_script_class_icons={
-"CollectibleItem": "",
-"Ghost": ""
+"CollectibleItem": ""
 }
 
 [application]
@@ -95,4 +89,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.52549, 0.52549, 0.52549, 1 )
