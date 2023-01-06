@@ -162,6 +162,10 @@ func process_input(_delta):
 			isPlayerReceivingInput = false
 			gui.visible = false
 			gamemodeElemsAnim.play("Win")
+			
+	if Input.is_action_just_pressed("flashlight_toggle"):
+		$Rotation_Helper/Flashlight.visible = not $Rotation_Helper/Flashlight.visible	
+			
 
 func process_movement(delta):
 	dir.y = 0
