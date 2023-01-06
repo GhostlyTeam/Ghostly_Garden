@@ -1,6 +1,8 @@
 extends Spatial
 
 const ghost_asset := preload("res://scenes/Ghost.tscn")
+
+
 var rng
 
 const MIN_TIME = 5.0
